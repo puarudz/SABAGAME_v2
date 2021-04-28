@@ -1,9 +1,9 @@
-var Package_Model = require('../models/package');
+var History_Model = require('../models/history');
 
-const Package = (data) => {
+const History = (data) => {
     try {
         return new Promise((resolve, reject) => {
-            Package_Model.find(data).exec((err, docs) => {
+            History_Model.find(data).exec((err, docs) => {
                 if(err) {
                     reject(err);
                 }else {
@@ -20,5 +20,5 @@ const Package = (data) => {
 
 
 module.exports = {
-    Package: Package
+    History: History
 }

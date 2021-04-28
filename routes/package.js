@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 var helper = require('../app/Helpers');
-var User = require('../models/users');
-var Package = require('../models/package');
-var Package_Settings = require('../models/package_settings');
+var User = require('../app/userinfo');
+var Package = require('../app/package');
+var Package_Settings = require('../app/package_settings');
 
 // middleware check login
 function authChecker(req, res, next) {
@@ -21,8 +21,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/buy-package', function (req, res) {
-    Package_Settings.find().
-    exec((er, data) => {
+    Package_Settings.Package().then(data => {
         res.render("buy_package", {
             helper: helper,
             worker: false,
@@ -35,15 +34,15 @@ router.get('/buy-package', function (req, res) {
 
 router.post('/package_info', function (req, res) {
     if (req.body.package_id) {
-        Package_Settings.findOne().
-        where('package_prefix').equals(req.body.package_id).
-        exec((err, data) => {
-            if (err) {
+        Package_Settings.FindOne({
+            package_prefix: req.body.package_id
+        }).then(data => {
+            if(!data) {
                 res.json({
                     status: false,
-                    msg: err
+                    msg: 'Package Not Found!'
                 });
-            } else {
+            }else {
                 res.json({
                     status: true,
                     data: data,
@@ -63,59 +62,60 @@ router.post('/package_info', function (req, res) {
 
 router.post('/package_buy', function (req, res) {
     if (req.body.package_id) {
-        Package_Settings.findOne().
-        where('package_prefix').equals(req.body.package_id).
-        exec((err, data_package) => {
-            if (err) {
+        
+        Package_Settings.FindOne({
+            package_prefix: req.body.package_id
+        }).then(data => {
+            if(!data) {
                 res.json({
                     status: false,
-                    msg: err
+                    msg: 'Package Not Found'
                 });
-            } else {
-                Package.findOne().
-                where('username').equals(req.session.username).
-                where('package').equals(req.body.package_id).
-                exec((err, data_checker) => {
-                    if (data_checker) {
+            }else {
+                Package.FindOne({
+                    username : req.session.username,
+                    package: req.body.package_id                    
+                }).then(data => {
+                    if(data) {
                         res.json({
                             status: false,
                             msg: 'Bạn đã mua chức năng này trước đó rồi!'
-                        });
-                    } else {
+                        });                        
+                    }else {
                         if (req.session.money < data_package.price) {
                             res.json({
                                 status: false,
                                 msg: 'Tài khoản của bạn không đủ để mua chức năng này!'
                             });
                         } else {
-                            User.updateOne({
+
+                            User.UpdateOne({
                                 username: req.session.username
                             }, {
                                 $inc: {
                                     money: -data_package.price
                                 }
-                            }).exec((err, user_buy) => {
-                                if (err) {
+                            }).then(data => {
+                                if (!data) {
                                     res.json({
                                         status: false,
-                                        msg: err
+                                        msg: 'User Not Found'
                                     });
                                 } else {
                                     var now = helper.timestamp();
                                     var uoc_tinh = 86400 * 30;
 
-                                    Package.create({
+                                    Package.Creat({
                                         username: req.session.username,
                                         package: req.body.package_id,
                                         time_expire: now + uoc_tinh,
                                         time: now
-                                    });
-
-                                    // session updated 
-                                    req.session.money = req.session.money - data_package.price;
-                                    res.json({
-                                        status: true,
-                                        msg: 'Mua chức năng thành công!'
+                                    }).then(data => {
+                                        res.json({
+                                            status: true,
+                                            msg: 'Mua chức năng thành công!'
+                                        });
+                                    req.session.money = req.session.money - data_package.price;                                                                                
                                     });
                                 }
                             });
@@ -124,6 +124,7 @@ router.post('/package_buy', function (req, res) {
                 });
             }
         });
+
     } else {
         res.render({
             status: false,

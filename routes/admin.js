@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var helper = require('../app/Helpers');
-var User = require('../models/users');
+var User = require('../app/userinfo');
 var Package = require('../models/package');
 var Package_Settings = require('../models/package_settings');
 var admin = require("../config/admin");
@@ -25,14 +25,15 @@ router.get('/', (req, res) => {
 
 router.get('/user-manager', (req, res) => {
     if(req.session.username == admin.account) {
-        User.find().exec((err, data) => {
+        User.Account().then(data => {
             res.render('admin/dashboard', {
                 helper: helper,
                 worker: false,
                 data: data,
                 session: req.session
             });
-        });        
+        });
+
     }else {
         res.send('Page Not Found!');
     }
@@ -40,15 +41,18 @@ router.get('/user-manager', (req, res) => {
 
 router.post('/user-manager', (req, res) => {
     if(req.session.username == admin.account) {
-        User.findOne({
+        User.FindOne({
             UID: req.body.user_id
-        }).exec((err, data) => {
+        }).then(data => {
+            console.log(data);
             if(!data) {
                 res.json({
                     status: false,
                     msg: 'Người dùng này không tồn tại!'
                 });
             }else {
+
+                // Check coi admin có đang thực hiện lên tài khoản của mình hay không?
                 if(data.UID == req.session.UID) {
                     res.json({
                         status: false,
@@ -57,27 +61,33 @@ router.post('/user-manager', (req, res) => {
                 }else {
                     switch(req.body.type) {
                         case 'delete':
-                            User.deleteOne({
+                            User.DeleteOne({
                                 UID: req.body.user_id
-                            }).exec();
-                            res.json({
-                                status: true,
-                                msg: 'Xóa người dùng thành công'
-                            });           
+                            }).then(data => {
+                                res.json({
+                                    status: true,
+                                    msg: 'Xóa người dùng thành công'
+                                }); 
+                            });
                         break;
             
                         case 'edit':
-                            User.updateOne({
-                                UID: req.body.user_id
-                            }, { $set: {
-                                money: req.body.money
-                            }}).exec();
+                            console.log(req.body.user_id);
+                            const filter = { UID: req.body.user_id };
+                            const update = { money: req.body.money };
+                            User.UpdateOne(filter, update).then(data => {
+                                (async () => {
+                                    await res.json({
+                                        status: true,
+                                        msg: 'Cập Nhật Thành Công!'
+                                    }); 
+                                });                               
+                            });
+
                             res.json({
                                 status: true,
                                 msg: 'Cập Nhật Thành Công!'
-                            });     
-
-
+                            }); 
                         break;
 
                         case 'load_info':
@@ -89,15 +99,17 @@ router.post('/user-manager', (req, res) => {
                         break;
             
                         default:
-                            res.json({
-                                status: false,
-                                msg: 'Lỗi hệ thống!'
+                            (async () => {
+                                await res.json({
+                                    status: false,
+                                    msg: 'Lỗi hệ thống!'
+                                });
                             });
                         break;
                     }
                 }
             }
-        });        
+        });
     }else {
         res.json({
             status: false,

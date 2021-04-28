@@ -2,9 +2,9 @@ var admin = require('../config/admin');
 const express = require("express");
 const router = express.Router();
 var helper = require('../app/Helpers');
-var User = require('../models/users');
-var History = require('../models/history');
-var Package = require('../models/package');
+var User = require('../app/userinfo');
+var History = require('../app/history');
+var Package = require('../app/package');
 
 
 // middleware
@@ -32,10 +32,10 @@ function packageChecker(req, res, next) {
     }
 
     if (req.session.username) {
-        Package.find().
-        where('username').equals(req.session.username).
-        where('package').equals(condition).
-        exec((er, data) => {
+        Package.Package({
+            username: req.session.username,
+            package: condition            
+        }).then(data => {
             if(data.length <= 0) {
                 res.redirect("/package/buy-package");
             }else {
@@ -50,16 +50,16 @@ function packageChecker(req, res, next) {
 router.use(authChecker);
 
 router.get('/', (req, res) => {
-    History.find().
-    where('username').equals(req.session.username).
-    where('game').equals('go88').
-    exec((er, data) => {
+    History.History({
+        username: req.session.username,
+        game: 'go88'
+    }).then(data => {
         res.render("dashboard", {
-                helper: helper,
-                worker: false,
-                data: data,
-                session: req.session
-            });
+            helper: helper,
+            worker: false,
+            data: data,
+            session: req.session
+        });
     });
 });
 
@@ -127,10 +127,10 @@ router.post('/auth', (req, res) => {
                                 msg: 'Tên đăng nhập không được nhỏ hơn 6 kí tự!'
                             });
                         } else {
-                            User.findOne({
+                            User.FindOne({
                                 'username': req.body.username,
                                 'password': helper.md5_hash(req.body.password)
-                            }).exec(function (err, check) {
+                            }).then(check => {
                                 if (!check) {
                                     res.json({
                                         status: false,
@@ -183,28 +183,31 @@ router.post('/auth', (req, res) => {
                                 });
                             } else {
                                 if (req.body.password == req.body.passwordcf) {
-                                    User.findOne({
+
+                                    User.FindOne({
                                         'username': req.body.username
-                                    }).exec(function (err, check) {
-                                        if (!check) {
-                                            User.create({
+                                    }).then(data => {
+                                        if(!data) {
+                                            User.Creat({
                                                 username: req.body.username,
                                                 password: helper.md5_hash(req.body.password),
                                                 money: 0,
                                                 token: helper.TokenGen(req.body.password),
                                                 time: helper.timestamp()
+                                            }).then(data => {
+                                                res.json({
+                                                    status: true,
+                                                    msg: 'Tạo tài khoản thành công! Vui lòng đăng nhập!'
+                                                });
                                             });
-                                            res.json({
-                                                status: true,
-                                                msg: 'Tạo tài khoản thành công! Vui lòng đăng nhập!'
-                                            });
-                                        } else {
+
+                                        }else {
                                             res.json({
                                                 status: false,
                                                 msg: 'Tài khoản đã tồn tại!'
                                             });
                                         }
-                                    });
+                                    })
                                 } else {
                                     res.json({
                                         status: false,

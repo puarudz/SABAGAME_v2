@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('./app/database');
+const connectDB = require('./app/database');
 var express = require('express');
 var session = require('express-session');
 var app = express();
@@ -19,6 +19,9 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 app.use(express.static(__dirname + '/public'));
 
+
+/* Connect DB */
+connectDB();
 
 // xóa user hết hạn
 var Cron_Expires = require('./app/Cron_Expires');

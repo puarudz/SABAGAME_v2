@@ -1,15 +1,13 @@
-var helper = require('../app/Helpers');
-
-var Package = require('../models/package');
+var Package = require('../app/Package');
 
 module.exports = () => {
     setInterval(() => {
-        Package.find().then((data) => {
+        Package.Package().then(data => {
             data.forEach((data) => {
                 if(data.time > data.time_expire) {
                     Package.deleteOne({username: data.username}).exec();
                 }
             });
         });
-    }, 10000);
+    }, 5000);
 }

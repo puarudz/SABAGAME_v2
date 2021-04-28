@@ -1,6 +1,5 @@
 let AutoIncrement = require('mongoose-auto-increment-reworked').MongooseAutoIncrementID;
 let mongoose = require('mongoose');
-let bcrypt = require('bcrypt');
 let UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -29,6 +28,6 @@ let UserSchema = new mongoose.Schema({
 });
 
 
-UserSchema.plugin(AutoIncrement.plugin, {modelName: 'Users', field:'UID'});
-var User = mongoose.model('Users', UserSchema);
+UserSchema.plugin(AutoIncrement.plugin, {modelName: 'users', field:'UID'});
+var User = mongoose.model('users', UserSchema);
 module.exports = User;

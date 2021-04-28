@@ -1,16 +1,18 @@
-require('./app/database');
+const connectDB = require('./app/database');
 var Package = require('./models/package');
 var helper = require('./app/Helpers');
 var histories = require('./models/history');
 var UserInfo = require('./app/UserInfo');
 const User = require('./models/users');
 
-setTimeout(function() {
+/* Connect DB */
+connectDB();
+
     var get = UserInfo.Account('kunkeypr');
     get.then(docs => {
         console.log(docs.username);
     })
-}, 2000);
+
 
 
 
