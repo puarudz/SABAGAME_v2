@@ -1,0 +1,106 @@
+<%- include('include/header'); -%>
+<style>
+    p {
+        font-weight: bold;
+    }
+
+    .red {
+        color: rgb(224, 56, 56);
+    }
+</style>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card_box box_shadow position-relative mb_30">
+            <div class="box_body">
+                <!--   -->
+                <div class="default-according arrow_style" id="accordionoc">
+                    <div class="card">
+                        <div class="card-header parpel_bg " style="background: #900d86 !important;">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text_white" data-toggle="collapse"
+                                    data-target="#collapseicon" aria-expanded="true" aria-controls="collapse11"><i
+                                        class="far fa-credit-card"></i>
+                                </button>
+                                <font style="color: #fff">NẠP TIỀN QUA VÍ MOMO</font>
+                            </h5>
+                        </div>
+                        <div class="collapse show" id="collapseicon" aria-labelledby="collapseicon"
+                            data-parent="#accordionoc" style="">
+                            <div class="card-body" style="padding: 26px;">
+                                <div class="row">
+                                    <div class="col-md-7 col-lg-7">
+                                        <h4>Chuyển Khoản Qua Ví MOMO</h4>
+                                        <p>Nội dung: <span class="red">NAPTIEN
+                                                <%= session.username.toUpperCase() %></span></p>
+                                        <p>Người nhận: <span class="red">Vũ Duy LỰC</span> </p>
+                                        <p>Tài Khoản: <span class="red">0836851125</span> </p>
+                                        <p>Chiết Khấu: <span class="red">0%</span>
+                                            <p>
+                                                <p>Giao dịch nhanh gọn trong vòng 5 phút, tiền sẽ được cộng trực tiếp
+                                                    vào tài khoản của bạn</p>
+                                    </div>
+                                    <div class="col-md-5 col-lg-5">
+                                        <img style="height: 200px; width: auto;"
+                                            src="https://upload.wikimedia.org/wikipedia/vi/archive/f/fe/20201011055543%21MoMo_Logo.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--   -->
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card_box box_shadow position-relative mb_30">
+            <div class="box_body">
+                <!--   -->
+                <div class="default-according arrow_style" id="accordionoc">
+                    <div class="card">
+                        <div class="card-header parpel_bg " style="background: #5f4ef8 !important;">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link text_white" data-toggle="collapse"
+                                    data-target="#collapseicon2" aria-expanded="true" aria-controls="collapse11"><i class="fas fa-id-card"></i>
+                                </button>
+                                <font style="color: #fff">NẠP TIỀN QUA NGÂN HÀNG</font>
+                            </h5>
+                        </div>
+                        <div class="collapse show" id="collapseicon2" aria-labelledby="collapseicon2"
+                            data-parent="#accordionoc" style="">
+                            <div class="card-body" style="padding: 26px;">
+                                <div class="row">
+                                    <div class="col-md-7 col-lg-7">
+                                        <h4>Chuyển Khoản Qua Ngân Hàng</h4>
+                                        <p>Nội dung: <span class="red">NAPTIEN
+                                                <%= session.username.toUpperCase() %></span></p>
+                                        <p>Người nhận: <span class="red">Vũ Duy LỰC</span> </p>
+                                        <p>Tài Khoản: <span class="red">107866899192</span> </p>
+                                        <p>Chiết Khấu: <span class="red">0%</span>
+                                            <p>
+                                                <p>Giao dịch nhanh gọn trong vòng 5 phút, tiền sẽ được cộng trực tiếp
+                                                    vào tài khoản của bạn</p>
+                                    </div>
+                                    <div class="col-md-5 col-lg-5">
+                                        <img style="height: 200px; width: auto;"
+                                            src="https://cdn.tgdd.vn/2020/04/GameApp/246x0w-200x200.png">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--   -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<%- include('include/footer'); -%>

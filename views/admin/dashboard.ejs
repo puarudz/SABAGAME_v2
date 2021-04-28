@@ -1,0 +1,405 @@
+<%- include('../include/header'); %>
+
+<style>
+    th {
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    .action_btns {
+        margin-left: 50px;
+    }
+
+    .btn {
+        margin-left: 5px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-8 col-xl-8 col-lg-8">
+        <div class="white_card card_height_100 mb_30 user_crm_wrapper">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="single_crm">
+                        <div class="crm_head d-flex align-items-center justify-content-between">
+                            <div class="thumb">
+                                <img src="img/crm/businessman.svg" alt="">
+                            </div>
+                            <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                        </div>
+                        <div class="crm_body">
+                            <h4>2455</h4>
+                            <p>User Registrations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="single_crm ">
+                        <div class="crm_head crm_bg_1 d-flex align-items-center justify-content-between">
+                            <div class="thumb">
+                                <img src="img/crm/customer.svg" alt="">
+                            </div>
+                            <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                        </div>
+                        <div class="crm_body">
+                            <h4>2455</h4>
+                            <p>User Registrations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="single_crm">
+                        <div class="crm_head crm_bg_2 d-flex align-items-center justify-content-between">
+                            <div class="thumb">
+                                <img src="img/crm/infographic.svg" alt="">
+                            </div>
+                            <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                        </div>
+                        <div class="crm_body">
+                            <h4>2455</h4>
+                            <p>User Registrations</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="single_crm">
+                        <div class="crm_head crm_bg_3 d-flex align-items-center justify-content-between">
+                            <div class="thumb">
+                                <img src="img/crm/sqr.svg" alt="">
+                            </div>
+                            <i class="fas fa-ellipsis-h f_s_11 white_text"></i>
+                        </div>
+                        <div class="crm_body">
+                            <h4>2455</h4>
+                            <p>User Registrations</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-xl-12 col-md-12">
+                    <div class="white_card card_height_100 mb_30 pt-4">
+                        <div class="white_card_body">
+                            <div class="QA_section">
+                                <div class="white_box_tittle list_header">
+                                    <h4>Danh Sách User</h4>
+                                    <div class="box_right d-flex lms_block">
+                                        <div class="serach_field_2">
+                                            <div class="search_inner">
+                                                <div class="search_field">
+                                                    <input type="text" id="filterdataa"
+                                                        placeholder="Nhập nội dung tìm kiếm vào đây">
+                                                </div>
+                                                <button type="button"> <i class="ti-search"></i> </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="QA_table mb_30">
+                                    <!-- table-responsive -->
+                                    <table class="table lms_table_active ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">UID</th>
+                                                <th scope="col">Username</th>
+                                                <th scope="col">Money</th>
+                                                <th scope="col">Register Time</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% for(var i=0; i < data.length; i++) { %>
+                                            <tr>
+                                                <th scope="row"> <a href="#"
+                                                        class="question_content">#<%= data[i].UID %></a></th>
+                                                <td><%= data[i].username.toUpperCase() %></td>
+                                                <td><%= helper.number_format(data[i].money) %></td>
+                                                <td><%= helper.timeConverter(data[i].time) %></td>
+                                                <td>
+                                                    <div class="action_btns d-flex">
+                                                        <a href="javascript:void(edit_user('<%= data[i].UID %>', '<%= data[i].username %>'))"
+                                                            class="btn btn-outline-info mb-3"> <i
+                                                                class="far fa-edit"></i> </a>
+                                                        <a href="javascript:void(delete_user('<%= data[i].UID %>', '<%= data[i].username %>'))"
+                                                            class="btn btn-outline-danger mb-3"> <i
+                                                                class="fas fa-trash"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="col-lg-12">
+            <div class="white_card card_height_100 mb_30 user_crm_wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="crm_reports_bnner">
+                            <div class="row justify-content-end ">
+                                <div class="col-lg-8">
+                                    <h4>Create CRM Reports</h4>
+                                    <p>Outlines keep you and honest
+                                        indulging honest.</p>
+                                    <a href="#">Read More <i class="fas fa-arrow-right"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="white_card card_height_100 mb_30">
+                <div class="white_card_header">
+                    <div class="box_header m-0">
+                        <div class="main-title">
+                            <h3 class="m-0">Recent activity</h3>
+                        </div>
+                        <div class="header_more_tool">
+                            <div class="dropdown">
+                                <span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown">
+                                    <i class="ti-more-alt"></i>
+                                </span>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"> <i class="ti-eye"></i> Action</a>
+                                    <a class="dropdown-item" href="#"> <i class="ti-trash"></i> Delete</a>
+                                    <a class="dropdown-item" href="#"> <i class="fas fa-edit"></i> Edit</a>
+                                    <a class="dropdown-item" href="#"> <i class="ti-printer"></i> Print</a>
+                                    <a class="dropdown-item" href="#"> <i class="fa fa-download"></i> Download</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--- Lịch Sử Hoạt Động -->
+                <div class="white_card_body">
+                    <div class="Activity_timeline">
+                        <ul>
+                            <li>
+                                <div class="activity_bell"></div>
+                                <div class="timeLine_inner d-flex align-items-center">
+                                    <div class="activity_wrap">
+                                        <h6>5 min ago</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="activity_bell "></div>
+                                <div class="timeLine_inner d-flex align-items-center">
+                                    <div class="activity_wrap">
+                                        <h6>5 min ago</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="activity_bell bell_lite"></div>
+                                <div class="timeLine_inner d-flex align-items-center">
+                                    <div class="activity_wrap">
+                                        <h6>5 min ago</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="activity_bell bell_lite"></div>
+                                <div class="timeLine_inner d-flex align-items-center">
+                                    <div class="activity_wrap">
+                                        <h6>5 min ago</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(() => {
+        var oTable = $('.lms_table_active').DataTable({
+            "order": [
+                [0, "desc"]
+            ],
+            "pageLength": 20,
+            bLengthChange: false,
+            "bDestroy": true,
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+            },
+            columnDefs: [{
+                visible: true
+            }],
+            responsive: true,
+            searching: true,
+            info: false,
+            paging: true
+        });
+        $('#filterdataa').keyup(function () {
+            oTable.search($(this).val()).draw();
+        });
+        setTimeout(() => {
+            $('#DataTables_Table_0_filter').hide();
+        }, 100);
+    });
+
+    function edit_user() {
+
+    }
+
+    function delete_user(id, username) {
+        $.confirm({
+            columnClass: 'small',
+            closeIcon: true,
+            title: 'Xác Nhận?',
+            content: '<b>Bạn có xóa ' + username.toUpperCase() +
+                ' khỏi hệ thống hay không?<br>Mọi dữ liệu cửa người dùng này sẽ biến mất!</b>',
+            type: 'red',
+            typeAnimated: true,
+            buttons: {
+                YES: {
+                    text: 'Đồng ý',
+                    btnClass: 'btn-red',
+                    action: function () {
+                        $.ajax({
+                            url: "/admin/user-manager",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                user_id: id,
+                                type: 'delete'
+                            },
+                            success: function (deleting) {
+                                if (deleting.status) {
+                                    cuteToast({
+                                        type: "success",
+                                        message: deleting.msg,
+                                        timer: 5000
+                                    });
+                                    setTimeout(() => {
+                                        window.location = '';
+                                    }, 1000);
+                                } else {
+                                    cuteToast({
+                                        type: "error",
+                                        message: deleting.msg,
+                                        timer: 5000
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                No: {
+                    text: 'Hủy',
+                    btnClass: 'btn-default'
+                }
+            }
+        });
+    }
+
+
+
+    function edit_user(id, username) {
+        $.ajax({
+            url: "/admin/user-manager",
+            type: "post",
+            dataType: "json",
+            data: {
+                user_id: id,
+                type: 'load_info'
+            },
+            success: function (loading) {
+                if (loading.status) {
+                    $('#money').val(loading.data.money);
+                } else {
+                    cuteToast({
+                        type: "error",
+                        message: loading.msg,
+                        timer: 5000
+                    });
+                }
+            }
+        });
+
+        $.confirm({
+            columnClass: 'small',
+            closeIcon: true,
+            title: 'Chỉnh Sửa Thông Tin!',
+            content: '<div class="row col-md-12"><div class="col-md-4">Tiền hiện tại<br>' + username
+                .toUpperCase() +
+                ':</div><div class="col-md-8"><input type="text" class="form-control mb-2" id="money" placeholder="Nhập số tiền muốn thay đổi vào đây..."></div></div>',
+            type: 'blue',
+            typeAnimated: true,
+            buttons: {
+                YES: {
+                    text: 'Lưu',
+                    btnClass: 'btn-red',
+                    action: function () {
+                        $.ajax({
+                            url: "/admin/user-manager",
+                            type: "post",
+                            dataType: "json",
+                            data: {
+                                user_id: id,
+                                money: $('#money').val(),
+                                type: 'edit'
+                            },
+                            success: function (editing) {
+                                if (editing.status) {
+                                    cuteToast({
+                                        type: "success",
+                                        message: editing.msg,
+                                        timer: 5000
+                                    });
+                                    setTimeout(() => {
+                                        window.location = '';
+                                    }, 1000);
+                                } else {
+                                    cuteToast({
+                                        type: "error",
+                                        message: editing.msg,
+                                        timer: 5000
+                                    });
+                                }
+                            }
+                        });
+                    }
+                },
+                No: {
+                    text: 'Hủy',
+                    btnClass: 'btn-default'
+                }
+            }
+        });
+    }
+</script>
+
+
+
+
+
+<%- include('../include/footer'); %>

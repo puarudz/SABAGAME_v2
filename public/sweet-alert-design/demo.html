@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Demo As Alert Message</title>
+	<link rel="stylesheet" href="css/as-alert-message.min.css">
+	<style>
+		body{
+			font-family: arial;
+		}
+		.as-btn, button.as-btn, a.as-btn{
+		  font-size: .75rem;
+		  font-weight: 500;
+		  letter-spacing: 1px;
+		  padding: 10px 20px;
+		  border-radius: .25rem;
+		  text-transform: uppercase;
+		  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+		  cursor: pointer;
+		  margin: 5px;
+		  display: inline-block;
+		}
+		.as-btn-sm {
+		  padding: 8px 17px !important;
+		}
+
+		.as-btn-blue {
+		  color: #fff;
+		  background-color: #008cff;
+		  border-color: #008cff
+		}
+
+		.as-btn-blue:hover {
+		  color: #fff;
+		  background-color: #0069d9;
+		  border-color: #0062cc
+		}
+
+		.as-btn-blue.focus, .as-btn-blue:focus {
+		  box-shadow:none;
+		}
+		.as-btn-green {
+		  color: #fff;
+		  background-color: #15ca20;
+		  border-color: #15ca20
+		}
+		.as-btn-green:hover {
+		  color: #fff;
+		  background-color: #218838;
+		  border-color: #1e7e34
+		}
+		.as-btn-green.focus, .as-btn-green:focus {
+		  box-shadow:none;
+		}
+		.as-btn-info {
+		  color: #fff;
+		  background-color: #0dceec;
+		  border-color: #0dceec
+		}
+		.as-btn-info:hover {
+		  color: #fff;
+		  background-color: #138496;
+		  border-color: #117a8b
+		}
+		.as-btn-info.focus, .as-btn-info:focus {
+		  box-shadow:none;
+		}
+		.as-btn-orange {
+		  color: #fff;
+		  background-color: #ff9700;
+		  border-color: #ff9700
+		}
+		.as-btn-orange:hover {
+		  color: #fff;
+		  background-color: #e0a800;
+		  border-color: #d39e00
+		}
+		.as-btn-orange.focus, .as-btn-orange:focus {
+		  box-shadow:none;
+		}
+		.as-btn-red {
+		  color: #fff;
+		  background-color: #fd3550;
+		  border-color: #fd3550
+		}
+		.as-btn-red:hover {
+		  color: #fff;
+		  background-color: #c82333;
+		  border-color: #bd2130
+		}
+		.as-btn-red.focus, .as-btn-red:focus {
+		  box-shadow:none;
+		}
+		.as-btn-block{
+		  display: block !important;
+		  width: 95%;
+		}
+		@media only screen and (min-width: 768px){
+		  .as-btn-block{
+		    display: inline-block !important;
+		    width: auto !important;
+		  }
+		}
+		.content-centered {
+		  -ms-flex-pack:center !important;
+		  justify-content:center !important;
+		  float: none !important;
+		  display: flex !important;
+		  align-items: center !important;
+		}
+		.text-center{
+		  text-align: center !important;
+		}
+	</style>	
+</head>
+<body>
+	
+	<div class="row content-centered">
+		<div class="col-as-8 text-center" style="margin-top:120px;">
+			<h1 class="t-blue border-bottom border-blue border-2">AsAlertMessage Examples</h1>
+			
+			<h3>AsAlertMessage Without Button</h3>
+			<button type="button" id="default" class="as-btn as-btn-sm as-btn-blue as-btn-block">As Alert Default</button>
+			<button type="button" id="error" class="as-btn as-btn-sm as-btn-block as-btn-red">As Alert Error</button>
+			<button type="button" id="warning" class="as-btn as-btn-sm as-btn-block as-btn-orange">As Alert Warning</button>
+			<button type="button" id="success" class="as-btn as-btn-sm as-btn-block as-btn-green">As Alert Success</button>
+
+			<h3 class="border-top">AsAlertMessage With Close Button</h3>
+			<button type="button" id="btn-default" class="as-btn as-btn-sm as-btn-blue as-btn-block">As Alert Default</button>
+			<button type="button" id="btn-error" class="as-btn as-btn-sm as-btn-block as-btn-red">As Alert Error</button>
+			<button type="button" id="btn-warning" class="as-btn as-btn-sm as-btn-block as-btn-orange">As Alert Warning</button>
+			<button type="button" id="btn-success" class="as-btn as-btn-sm as-btn-block as-btn-green">As Alert Success</button>
+
+			<div class="text-center" style="margin-top:30px;">
+				<a href="https://plugin.isfidev.net/asalertmessage/" class="as-btn as-btn-black">< Back to Home</a>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="js/as-alert-message.min.js"></script>
+	<script>
+		window.onload = function (evt) {	
+			var as_alert_default,as_alert_error,
+				as_alert_warning,as_alert_success,
+				btn_as_alert_default,btn_as_alert_error,
+				btn_as_alert_warning,btn_as_alert_success;
+
+			as_alert_default = document.getElementById('default');
+			as_alert_error = document.getElementById('error');
+			as_alert_warning = document.getElementById('warning');
+			as_alert_success = document.getElementById('success');
+			// ----------------------------------------------------------
+			btn_as_alert_default = document.getElementById('btn-default');
+			btn_as_alert_error = document.getElementById('btn-error');
+			btn_as_alert_warning = document.getElementById('btn-warning');
+			btn_as_alert_success = document.getElementById('btn-success');
+
+
+			/*
+			* Start AsAlertMessage Without Close Button ***
+			*/ 
+			// default
+				as_alert_default.addEventListener('click', () => {
+					asAlertMsg('hey test text');
+				});
+
+				// error
+				as_alert_error.addEventListener('click', () => {
+					asAlertMsg({
+						type: "error"
+					});
+				});
+
+				// warning
+				as_alert_warning.addEventListener('click', () => {
+					asAlertMsg({
+						type: "warning"
+					});
+				});
+
+				// success
+				as_alert_success.addEventListener('click', () => {
+					asAlertMsg({
+						type: "success"
+					});
+				});
+			/*
+			* End AsAlertMessage Without Close Button ***
+			*/ 
+
+
+			/*
+			* Start AsAlertMessage With Close Button ***
+			*/ 
+			// default
+				btn_as_alert_default.addEventListener('click', () => {
+					asAlertMsg({
+						type: "default",
+						title: "This is title message",
+						message: "This is text your message",
+						button: {}
+					});
+				});
+
+				// error
+				btn_as_alert_error.addEventListener('click', () => {
+					asAlertMsg({
+						type: "error",
+						title: "This is title message",
+						message: "This is text your message",
+						button: {}
+					});
+				});
+
+				// warning
+				btn_as_alert_warning.addEventListener('click', () => {
+					asAlertMsg({
+						type: "warning",
+						title: "This is title message",
+						message: "This is text your message",
+						button: {}
+					});
+				});
+
+				// success
+				btn_as_alert_success.addEventListener('click', () => {
+					asAlertMsg({
+						type: "success",
+						title: "This is title message",
+						message: "This is text your message",
+						button: {}
+					});
+				});
+			/*
+			* End AsAlertMessage With Close Button ***
+			*/ 
+		}
+	</script>
+</body>
+</html>

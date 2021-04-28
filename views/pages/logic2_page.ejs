@@ -1,0 +1,319 @@
+<div class="row ">
+                    <div class="col-xl-7 col-md-7 col-lg-7 col-xs-12">
+                        <div class="white_card mb_30 card_height_100">
+                            <div class="white_card_header">
+                                <div class="row align-items-center justify-content-between flex-wrap">
+                                    <div class="col-lg-4">
+                                        <div class="main-title">
+                                            <h3 class="m-0">GO88 OPTIONS</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="white_card_body">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Token GO88</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="token" placeholder="Token GO88"
+                                                aria-label="Token" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1">Session GO88</span>
+                                            </div>
+                                            <input type="text" class="form-control" id="session_token"
+                                                placeholder="Session GO88" aria-label="Session"
+                                                aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered" style="margin-top: 20px;">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="text-center">Thông Số</th>
+                                            <th scope="col" class="text-center">Giá Trị</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>Âm thanh</th>
+                                            <td>
+                                                <div class="custom-switch custom-switch-label-io">
+                                                    <input class="custom-switch-input" id="audio" type="checkbox"
+                                                        checked>
+                                                    <label class="custom-switch-btn" for="audio"> </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thống kê BET</th>
+                                            <td>
+                                                <div class="custom-switch custom-switch-label-io">
+                                                    <input class="custom-switch-input" id="thong_ke_bet"
+                                                        type="checkbox">
+                                                    <label class="custom-switch-btn" for="thong_ke_bet"> </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Product Mode<br>(Chạy tiền thì bật)</th>
+                                            <td>
+                                                <div class="custom-switch custom-switch-label-io">
+                                                    <input class="custom-switch-input" id="prod_mode" type="checkbox">
+                                                    <label class="custom-switch-btn" for="prod_mode"> </label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="start_money_bet">
+                                            <th>Bet Đặt Lần Đầu</th>
+                                            <td>
+                                                <select class="nice_Select2 nice_Select_line wide"
+                                                    style="display: none;" id="bet_choice">
+                                                    <option value="1">TÀI</option>
+                                                    <option value="2">XỈU</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số Tiền Bet Lần Đầu</th>
+                                            <td>
+                                                <select class="nice_Select2 nice_Select_line wide"
+                                                    style="display: none;" id="bet_start">
+                                                    <% for(var i=1; i <= 500; i++) { %>
+                                                    <option class="form-control" value="<%= i %>000"><%= i %>000
+                                                    </option>
+                                                    <% } %>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr class="bet_change">
+                                            <th>Bet Đổi Cầu Sau</th>
+                                            <td>
+                                                <select class="nice_Select2 nice_Select_line wide"
+                                                    style="display: none;" id="bet_loop">
+                                                    <option class="form-control" value="3">3 Lần</option>
+                                                    <% for(var i=1; i <= 10; i++) { %>
+                                                    <option class="form-control" value="<%= i %>"><%= i %> Lần</option>
+                                                    <% } %>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hệ Số Bet</th>
+                                            <td>
+                                                <select class="nice_Select2 nice_Select_line wide"
+                                                    style="display: none;" id="bet_multiply">
+                                                    <option class="form-control" value="2">nhân 2</option>
+                                                    <% for(var i=1; i <= 10; i++) { %>
+                                                    <option class="form-control" value="<%= i %>">nhân <%= i %></option>
+                                                    <% } %>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hệ Số Rate</th>
+                                            <td>
+                                                <select class="nice_Select2 nice_Select_line wide"
+                                                    style="display: none;" id="bet_rate">
+                                                    <% for(var i=1; i <= 10; i++) { %>
+                                                    <option class="form-control" value="<%= i %>">nhân <%= i %></option>
+                                                    <% } %>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số lần thua liên tiếp<br>(tính trước vốn)</th>
+                                            <td>
+                                                <div class="common_input mb_15">
+                                                    <input type="number" min="0" class="form-control" name="inputNumber"
+                                                        id="number_of_bet_false" value="0">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pull-left" id="test_case">
+                                </div>
+                                <div class="pull-right">
+                                    <button id="stop" class="btn btn-danger rounded-pill mb-3"><i class="fa fa-pause"
+                                            aria-hidden="true"></i> Stop BOT</button>
+                                    <button id="excute" class="btn btn-info rounded-pill mb-3"><i class="fa fa-play"
+                                            aria-hidden="true"></i> Run BOT</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-md-5 col-lg-5 col-xs-12">
+                        <div class="white_card card_height_100 mb_30 user_crm_wrapper">
+                            <div class="row">
+
+                                <div class="col-lg-12 col-md-12 col-xs-12" id="connect_selector">
+                                    <div class="white_card card_height_100 mb_30">
+                                        <div class="white_card_body">
+                                            <div class="row justify-content-center" id="connect-status">
+                                                <div class="loader--ring Ring_3 mb_30">
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                </div>
+                                            </div>
+                                            <div id="connect-msg" class="col-lg-12 col-md-12 text-center">Đang kết nối tới Go88 ...</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="round_id" class="bold">...</h4>
+                                            <p>ID Phiên</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="bet_choicing">...</h4>
+                                            <p>Bet đang đặt</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="bet_money">...</h4>
+                                            <p>Tiền đang BET</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="result_bet">...</h4>
+                                            <p>Kết Quả BET</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="bet_false">...</h4>
+                                            <p>Số lần đang thua</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="curent_money">...</h4>
+                                            <p>Tiền ban đầu</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="now_money">...</h4>
+                                            <p>Tiền hiện tại</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="total_chi">...</h4>
+                                            <p>Tổng Chi</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="total_thu">...</h4>
+                                            <p>Tổng thu</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="total_thang">...</h4>
+                                            <p>Tổng số lần thắng</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4 id="total_thua">...</h4>
+                                            <p>Tổng số lần thua</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="single_crm">
+                                        <div class="crm_body">
+                                            <h4>
+                                                <o id="total_tai">0</o>/<o id="total_xiu">0</o>
+                                            </h4>
+                                            <p>Tổng Tài/ Xỉu</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="card_box box_shadow position-relative mb_30">
+                            <div class="white_box_tittle     " style="padding: 24px 23px 10px;">
+                                <div class="main-title2 ">
+                                    <h4 class="mb-2 nowrap ">GAME LOGS</h4>
+                                </div>
+                            </div>
+                            <div class="box_body" id="logs"
+                                style="padding: 19px;height: 566px;font-size: 13px; min-height: 10; overflow-y: scroll;">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="white_card card_height_100 mb_20 ">
+                            <div class="white_card_header">
+                                <div class="box_header m-0">
+                                    <div class="main-title">
+                                        <h3 class="m-0">LỊCH SỬ BET</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="white_card_body QA_section">
+                                <div class="QA_table ">
+                                    <!-- table-responsive -->
+                                    <table class="table lms_table_active2 p-0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="text-center">ID PHIÊN</th>
+                                                <th scope="col" class="text-center">TRẠNG THÁI</th>
+                                                <th scope="col" class="text-center">TIỀN ĐẶT</th>
+                                                <th scope="col" class="text-center">NHẬN ĐƯỢC</th>
+                                                <th scope="col" class="text-center">SAU GIAO DỊCH</th>
+                                                <th scope="col" class="text-center">CHI TIẾT</th>
+                                                <th scope="col" class="text-center">THỜI GIAN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="lichsu"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </div>

@@ -1,0 +1,94 @@
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="white_card card_height_100 mb_30">
+                    <div class="white_card_header">
+                        <div class="white_box_tittle list_header">
+                            <h4>LỊCH SỬ BET</h4>
+                            <div class="box_right d-flex lms_block">
+                                <div class="serach_field_2">
+                                    <div class="search_inner">
+                                            <div class="search_field">
+                                                <input type="text" id="filterdataa" placeholder="Nhập nội dung tìm kiếm vào đây">
+                                            </div>
+                                            <button type="button"> <i class="ti-search"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="white_card_body">
+                        <div class="QA_section">
+
+                            <div class="QA_table mb_30">
+                                <!-- table-responsive -->
+                                <table class="table lms_table_active3 ">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col text-center">TÊN GAME</th>
+                                            <th scope="col text-center">CHỨC NĂNG</th>
+                                            <th scope="col text-center">PHIÊN ID</th>
+                                            <th scope="col text-center">TIỀN CƯỢC</th>
+                                            <th scope="col text-center">KẾT QUẢ</th>
+                                            <th scope="col text-center">THỜI GIAN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <% for(var i=0; i < data.length; i++) { 
+                                                if(data[i].game_func == 'logic-1') {
+                                                    var func_name = 'Logic Chờ Cầu';
+                                                }else if(data[i].game_func == 'logic-2') {
+                                                    var func_name = 'Logic Gấp Thếp';
+                                                }else if(data[i].game_func == 'logic-3') {
+                                                    var func_name = 'Logic Về Đâu Đánh Đó';
+                                                }
+                                                %>
+                                            <tr>
+                                                <td scope="row" style="font-weight: bold;"><%= data[i].game.toUpperCase() %></td>
+                                                <td scope="row" style="font-weight: bold;"><%= func_name %></td>
+                                                <td scope="row">#<%= data[i].id_game %></td>
+                                                <td><%= helper.number_format(data[i].bet_money) %></td>
+                                                <% if(data[i].status_game == 'Thắng') { %>
+                                                    <td><a href="#" class="btn btn-sm btn-success"><%= data[i].status_game %></a></td>
+                                                <% }else if(data[i].status_game == 'Thua'){ %>
+                                                    <td><a href="#" class="btn btn-sm btn-danger"><%= data[i].status_game %></a></td>
+                                                <% }else { %>
+                                                    <td><a href="#" class="btn btn-sm btn-warning">Chờ xử lý...</a></td>
+                                                <% } %>
+                                                <td><%= helper.timeConverter(data[i].time) %></td>
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(() => {
+                var oTable =  $('.lms_table_active3').DataTable({
+                    "order": [[ 2, "desc" ]],
+                    bLengthChange: false,
+                    "bDestroy": true,
+                    language: {
+                        "url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/Vietnamese.json"
+                    },
+                    columnDefs: [{
+                        visible: true
+                    }],
+                    responsive: true,
+                    searching: true,
+                    info: false,
+                    paging: true
+                });
+                $('#filterdataa').keyup(function(){
+                    oTable.search( $(this).val() ).draw();
+                });
+                setTimeout(() => {
+                    $('#DataTables_Table_0_filter').hide();
+                }, 100);
+            });
+        </script>

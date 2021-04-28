@@ -1,0 +1,122 @@
+<%- include('include/header'); -%>
+
+<div class="row">
+
+
+
+    <% for(var i=0; i < data.length; i++) { %>
+    <div class="col-md-3">
+        <div class="white_card position-relative mb_20 ">
+            <div class="card-body">
+                <div class="ribbon1 rib1-primary"><span class="text-white text-center rib1-primary">Hot</span></div>
+                <!--end ribbon--><img src="<%= data[i].thumbnail %>"
+                    alt="" class="d-block mx-auto my-4" height="150">
+                <div class="row my-4">
+                    <div class="col"><span class="badge_btn_3  mb-1">Ổn Định</span></div>
+                    <div class="col-auto">
+                        <h4 class="text-dark mt-0"><%= helper.number_format(data[i].price) %> VND<small class="text-muted font-14">/tháng</small></h4>
+                    </div>
+                    <div class="col-md-12 text-center" style="font-weight: bolder;font-size: 19px;color: #626667;">
+                        <%= data[i].package_name %>
+                    </div>
+                </div>
+                <button id="<%= data[i].package_prefix %>" onclick="checkout_package('<%= data[i].package_prefix %>')" class="btn_2 btn-block">Mua Chức Năng</button>
+            </div>
+            <!--end card-body-->
+        </div>
+    </div>
+    <% } %>
+
+
+</div>
+
+
+
+<script>
+    $(document).ready(() => {
+        ///////
+    });
+
+    function checkout_package(package_id) {
+        //$('#' + package_id).prop("disabled", true);
+        $.ajax({
+            url: "/package/package_info",
+            type: "post",
+            dataType: "json",
+            data: {
+                package_id: package_id
+            },
+            success: function (result) {
+                if (result.status) {
+                    $.confirm({
+                        columnClass: 'small',
+                        closeIcon: true,
+                        title: result.data.package_name,
+                        content: '<b>Bạn có muốn mua chức năng này không?</b><br><br><div class="bg-info p-20 m-b-10">' +
+                            result.data.details + '</div>',
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            YES: {
+                                text: 'Đồng ý',
+                                btnClass: 'btn-red',
+                                action: function () {
+                                    $.ajax({
+                                        url: "/package/package_buy",
+                                        type: "post",
+                                        dataType: "json",
+                                        data: {
+                                            package_id: package_id
+                                        },
+                                        success: function (buying) {
+                                            if (buying.status) {
+                                                cuteToast({
+                                                    type: "success",
+                                                    message: buying.msg,
+                                                    timer: 5000
+                                                });
+                                                setTimeout(() => {
+                                                    cuteToast({
+                                                        type: "info",
+                                                        message: 'Vui lòng chọn lại chức năng',
+                                                        timer: 5000
+                                                    });
+                                                }, 3000);
+                                            } else {
+                                                cuteToast({
+                                                    type: "error",
+                                                    message: buying.msg,
+                                                    timer: 5000
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+                            },
+                            No: {
+                                text: 'Hủy',
+                                btnClass: 'btn-default'
+                            }
+                        }
+                    });
+                } else {
+                    cuteToast({
+                        type: "error",
+                        message: "Không tìm thấy gói này",
+                        timer: 5000
+                    })
+                }
+            },
+            error: function (request, status, error) {
+                alert('Sever Error');
+            }
+        })
+    }
+</script>
+
+
+
+
+
+
+<%- include('include/footer'); -%>
